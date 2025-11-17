@@ -13,8 +13,11 @@ if uploaded_file:
     matches_df = pd.read_excel(uploaded_file, sheet_name="Matches")
     lineups_df = pd.read_excel(uploaded_file, sheet_name="Team Lineups")
 
-    st.subheader("Players")
-    players_df = st.data_editor(players_df, num_rows="dynamic")
+    
+    st.subheader("Players (with at least 1 match played)")
+    filtered_players_df = players_df[players_df["Match Played"] > 0]
+    st.data_editor(filtered_players_df, num_rows="dynamic")
+
 
     st.subheader("Matches")
     mvp_options = players_df["Player Name"].tolist()
@@ -59,3 +62,4 @@ if uploaded_file:
             lineups_df.to_excel(writer, sheet_name="Team Lineups", index=False)
         output.seek(0)
         st.download_button("Download File", data=output, file_name="updated_file.xlsx")
+
