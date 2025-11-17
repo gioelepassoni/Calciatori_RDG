@@ -16,32 +16,9 @@ if uploaded_file:
     lineups_df = pd.read_excel(uploaded_file, sheet_name="Team Lineups")
 
     # Filter players with at least 1 match
-    st.subheader("Players (with at least 1 match played)")
+    st.subheader("Players leaderboard")
     filtered_players_df = players_df[players_df["Match Played"] > 0]
     st.data_editor(filtered_players_df, num_rows="dynamic")
-
-    # Matches MVP selection
-    st.subheader("Matches")
-    mvp_options = players_df["Player Name"].tolist()
-    for i in range(len(matches_df)):
-        current_mvp = matches_df.loc[i, "MVP"]
-        index = mvp_options.index(current_mvp) + 1 if current_mvp in mvp_options else 0
-        matches_df.loc[i, "MVP"] = st.selectbox(
-            f"MVP for Match {matches_df.loc[i, 'Match ID']}",
-            options=[""] + mvp_options,
-            index=index
-        )
-
-    # Team Lineups player selection
-    st.subheader("Team Lineups")
-    for i in range(len(lineups_df)):
-        current_player = lineups_df.loc[i, "Player Name"]
-        index = mvp_options.index(current_player) if current_player in mvp_options else 0
-        lineups_df.loc[i, "Player Name"] = st.selectbox(
-            f"Player for lineup row {i+1}",
-            options=mvp_options,
-            index=index
-        )
 
     # Download button
     if st.button("Download Updated Excel"):
