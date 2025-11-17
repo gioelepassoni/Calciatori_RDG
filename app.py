@@ -59,7 +59,6 @@ if uploaded_file:
             lineups_df.to_excel(writer, sheet_name="Team Lineups", index=False)
         output.seek(0)
 
-        st.download_button("Download File", data=output, file_name="updated_file.xlsx")
 
         # Show sorted table
         st.subheader("Players Sorted by Performance")
