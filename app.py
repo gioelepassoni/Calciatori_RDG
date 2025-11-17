@@ -7,7 +7,7 @@ st.set_page_config(page_title="Football Stats Manager", layout="wide")
 st.title("⚽ Football Stats Manager")
 
 # File upload
-uploaded_file = st.file_uploader("Upload Excel File", type=["xlsx"])
+uploaded_file = "NUOVO_CALCIATORI_RDG_with_player_name_fixed_dropdown.xlsx"
 
 if uploaded_file:
     # Load sheets
